@@ -14,7 +14,7 @@ export class JogadoresController {
   @Get()
   async consultarJogadores(@Query('email') email: string) {
     if (email) {
-      return await this.jogadoresServices.consultaJogadoresPeloEmail(email);
+      return await this.jogadoresServices.consultarJogadorPeloEmail(email);
     } else {
       return await this.jogadoresServices.consultarTodosJogadores();
     }
