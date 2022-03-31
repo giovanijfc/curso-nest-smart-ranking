@@ -27,8 +27,6 @@ export class JogadoresService {
       throw new BadRequestException(`Jogador com email ${email} já cadastrado`);
     }
 
-    this.logger.log('29 criarJogador');
-
     const jogadorCriado = new this.jogadorModel(criarJogadorDto);
     return await jogadorCriado.save();
   }
@@ -61,7 +59,7 @@ export class JogadoresService {
     }
   }
 
-  private async verificarSeJogadorFoiEncontrado(_id: string) {
+  async verificarSeJogadorFoiEncontrado(_id: string) {
     const jogadorEncontrado = await this.jogadorModel.findOne({ _id }).exec();
 
     if (!jogadorEncontrado) {

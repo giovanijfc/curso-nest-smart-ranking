@@ -109,4 +109,22 @@ export class CategoriasService {
       { $set: categoriaEncontrada },
     );
   }
+
+  async consultarCategoriaDoJogador(_id: any) {
+    await this.jogadoresService.verificarSeJogadorFoiEncontrado(_id);
+
+    const categoriaJogador = await this.categoriaModel
+      .findOne()
+      .where('jogadores')
+      .in(_id)
+      .exec();
+
+    if (!categoriaJogador) {
+      throw new BadRequestException(
+        `Jogador com id ${_id} não cadastrado em nenhuma categoria`,
+      );
+    }
+
+    return categoriaJogador;
+  }
 }
